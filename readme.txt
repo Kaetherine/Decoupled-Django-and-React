@@ -10,9 +10,9 @@ python -m pip install django-cors-headers
 
 3. cd into directory Project_Ipsum_and_dolor/APIProject and start the server
 
-python manage.py runserver
+python manage.py runserver-frontend
 
-4. cd into directory Project_Ipsum_and_dolor/mysite_react in a new terminal and start the server
+4. cd into directory Project_Ipsum_and_dolor/router-tutorial_3 in a new terminal and start the server
 npm run dev
 
 5. go to http://localhost:5173/ to the frontend
