@@ -1,20 +1,31 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.App {
+  max-width: auto;
+  text-align: left;
+  margin-left: 10%;
+  color: white;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  /* background-color: rgb(80, 135, 118); */
 }
 
 .App-header {
-  width:auto;
+  width:1500px;
   max-width: 80%;
   text-align: center;
-  margin-top: 50px;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 50px;
   color: white;
   font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+.link {
+  color: white;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
   background-color: rgb(80, 135, 118);
 }
 
@@ -24,7 +35,7 @@
   will-change: filter;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #67d2a9);
+  filter: drop-shadow(0 0 2em #b4fffdaa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);

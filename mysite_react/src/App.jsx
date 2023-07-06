@@ -1,27 +1,68 @@
-import LinkComponent from './components/LinkComponent'
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import ArticleList from './components/ArticleList'
+import Form from './components/Form'
+import LinkComponent from './components/LinkComponent'
 
 function App() {
+
+  const [articles, setArticles] = useState([])
+  const [editArticle, setEditArticles] = useState(null)
+
+    const updatedInformation = (article) => {
+      const new_article = articles.map(myarticle => {
+        if(myarticle.id === article.id) {
+          return article;
+        }
+        else {
+          return myarticle;
+        }
+      })
+  
+      setArticles(new_article)
+  
+    }
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/articles', {
+      'method' : 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization' : 'Token 4ff70db43d26a1eb5d05afd6d55045184a0e15e7'
+      }
+    })
+    .then(resp => resp.json())
+    .then(resp => setArticles(resp))
+    .catch(error => console.log(error))
+  },[])
+  const editBtn = (article) => {
+    setEditArticles(article)
+  }
+  const deleteBtn = (article) => {
+    const new_articles = articles.filter(myarticle => {
+      if(myarticle.id === article.id) {
+        return false
+      }
+      return true;
+    })
+
+    setArticles(new_articles)
+
+  }
 
   return (
     <div>
       <div>
-        <LinkComponent></LinkComponent>
+      <LinkComponent></LinkComponent>
       </div>
+      <br></br>
+      <br></br>
       <div className="App">
-        <div>
-          <a href="https://www.djangoproject.com/" target="_blank">
-            <img src="src\assets\django-logo-positive.png" className="logo" alt="django logo" />
-          </a>
-          <a href="https://reactjs.org" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
+      <ArticleList articles = {articles} editBtn = {editBtn} deleteBtn = {deleteBtn}></ArticleList>
+      
+      {editArticle ? <Form article = {editArticle} updatedInformation = {updatedInformation}></Form> : null}
       </div>
     </div>
-    
   )
 }
 

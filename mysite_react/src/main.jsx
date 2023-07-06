@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom"
-import App from './App'
-import ArticleList from './components/ArticleList'
-import UserList from './components/UserList'
-import './index.css'
+import Home from './components/Home'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -16,9 +17,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="articles" element={<ArticleList />} />
-      <Route path="users" element={<UserList />} />
+      <Route path="/" element={<Home />} />
+      <Route path="articles" element={<App />} />
     </Routes>
   </BrowserRouter>
 );
