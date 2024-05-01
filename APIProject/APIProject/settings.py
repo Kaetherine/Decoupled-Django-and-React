@@ -13,7 +13,9 @@ SECRET_KEY = 'django-insecure-f8#%_q9xxu1g@ye1#il^#60*%z#la9*t%d5@_%1zr_b953ks+f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+    ]
 
 
 # Application definition
@@ -51,8 +53,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS_ALLOW_ALL_ORIGINS = True  # Vorsicht, nicht für Produktion empfohlen
+
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", 
+    # 'http://localhost',
+    'http://172.17.0.2:8080',  # IP-Adresse von React App
 ]
 
 ROOT_URLCONF = 'APIProject.urls'

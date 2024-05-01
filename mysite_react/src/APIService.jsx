@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export class APIService {
     static UpdateArticle(article_id, body) {
-        return fetch(`http://127.0.0.1:8000/api/articles/${article_id}/`, {
+        return fetch(`http://localhost:8000/api/articles/${article_id}/`, {
 
             'method' : 'PUT',
       headers: {
@@ -15,7 +15,7 @@ export class APIService {
 
     static DeleteArticle(article_id, token) {
 
-    return fetch(`http://127.0.0.1:8000/api/articles/${article_id}/`, {
+    return fetch(`http://localhost:8000/api/articles/${article_id}/`, {
       'method':'DELETE',
       headers: {
           'Content-Type':'application/json',
