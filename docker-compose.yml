@@ -14,8 +14,8 @@ services:
     build: ./mysite_react
     volumes:
       - ./mysite_react:/app
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "8080:8080"
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm start
