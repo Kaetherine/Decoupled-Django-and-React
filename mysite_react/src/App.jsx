@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import ArticleList from './components/ArticleList'
 import Form from './components/Form'
@@ -10,6 +10,8 @@ function App() {
   const [editArticle, setEditArticles] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [showCreateForm, setShowCreateForm] = useState(false)
+  const formRef = useRef(null)
 
     const updatedInformation = (article) => {
       const new_article = articles.map(myarticle => {
@@ -22,7 +24,28 @@ function App() {
       })
   
       setArticles(new_article)
-  
+      setEditArticles(null) // Hide edit form after update
+    }
+
+    const articleCreated = (article) => {
+      setArticles([...articles, article])
+      setShowCreateForm(false) // Hide create form after creation
+    }
+
+    const cancelOperation = () => {
+      setEditArticles(null)
+      setShowCreateForm(false)
+    }
+
+    const startCreateArticle = () => {
+      setEditArticles(null) // Clear any existing edit
+      setShowCreateForm(true)
+      // Scroll to form after state update
+      setTimeout(() => {
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
     }
 
   useEffect(() => {
@@ -44,7 +67,14 @@ function App() {
   }, [])
 
   const editBtn = (article) => {
+    setShowCreateForm(false) // Hide create form if showing
     setEditArticles(article)
+    // Scroll to form after state update
+    setTimeout(() => {
+      if (formRef.current) {
+        formRef.current.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
   }
 
   const deleteBtn = async (article) => {
@@ -85,9 +115,31 @@ function App() {
       <br></br>
       <br></br>
       <div className="App">
-        <ArticleList articles = {articles} editBtn = {editBtn} deleteBtn = {deleteBtn}></ArticleList>
+        <ArticleList 
+          articles={articles} 
+          editBtn={editBtn} 
+          deleteBtn={deleteBtn}
+          startCreateArticle={startCreateArticle}
+        />
         
-        {editArticle ? <Form article = {editArticle} updatedInformation = {updatedInformation}></Form> : null}
+        {editArticle && (
+          <div ref={formRef}>
+            <Form 
+              article={editArticle} 
+              updatedInformation={updatedInformation}
+              cancelEdit={cancelOperation}
+            />
+          </div>
+        )}
+        
+        {showCreateForm && (
+          <div ref={formRef}>
+            <Form 
+              articleCreated={articleCreated}
+              cancelEdit={cancelOperation}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
