@@ -2,12 +2,11 @@ services:
   apiproject:
     build: ./APIProject
     volumes:
-      - ./APIProject:/app
+      - ./APIProject:/apiproject
     ports:
       - "8000:8000"
     environment:
       - PYTHONUNBUFFERED=1
-    command: python manage.py runserver 0.0.0.0:8000
   
   mysite_react:
     build: ./mysite_react
