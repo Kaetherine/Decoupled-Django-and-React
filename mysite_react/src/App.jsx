@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import ArticleList from './components/ArticleList'
 import Form from './components/Form'
-import LinkComponent from './components/LinkComponent'
 
 function App() {
 
@@ -52,15 +51,12 @@ function App() {
 
   return (
     <div>
-      <div>
-      <LinkComponent></LinkComponent>
-      </div>
       <br></br>
       <br></br>
       <div className="App">
-      <ArticleList articles = {articles} editBtn = {editBtn} deleteBtn = {deleteBtn}></ArticleList>
-      
-      {editArticle ? <Form article = {editArticle} updatedInformation = {updatedInformation}></Form> : null}
+        <ArticleList articles = {articles} editBtn = {editBtn} deleteBtn = {deleteBtn}></ArticleList>
+        
+        {editArticle ? <Form article = {editArticle} updatedInformation = {updatedInformation}></Form> : null}
       </div>
     </div>
   )

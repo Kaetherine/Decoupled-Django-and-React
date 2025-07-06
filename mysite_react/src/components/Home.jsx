@@ -1,13 +1,11 @@
 import React from 'react';
-import LinkComponent from './LinkComponent';
 
 function Home() {
   return (
     <div className="App-header">
-    <LinkComponent></LinkComponent>
-    <div>
       <br></br>
       <br></br>
+      <div>
         <div>
           <a href="https://www.djangoproject.com/" target="_blank">
             <img src="src\assets\django-logo-positive.png" className="logo" alt="django logo" />

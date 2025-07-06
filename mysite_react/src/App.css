@@ -2,31 +2,32 @@
   max-width: auto;
   text-align: left;
   margin-left: 10%;
-  color: white;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  color: black;
+  font-family: 'Raleway', sans-serif;
   /* background-color: rgb(80, 135, 118); */
 }
 
 .App-header {
-  width:1500px;
-  max-width: 80%;
+  width: 100%;
+  max-width: 100%;
   text-align: center;
-  margin-left: 10%;
-  margin-right: 10%;
-  color: white;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  margin-left: 0;
+  margin-right: 0;
+  color: black;
+  font-family: 'Raleway', sans-serif;
 }
 
 .link {
-  color: white;
+  color: black;
 }
 
 #root {
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
   padding: 2rem;
   text-align: center;
-  background-color: rgb(80, 135, 118);
+  background-color: white;
 }
 
 .logo {

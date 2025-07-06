@@ -1,6 +1,5 @@
-
 from django.urls import path, include
-from .views import ArticleViewSet, UserViewSet
+from .views import ArticleViewSet, UserViewSet, user_info, health_check
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -8,5 +7,7 @@ router.register('articles', ArticleViewSet, basename='articles')
 router.register('users', UserViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls))
-    ]
+    path('api/', include(router.urls)),
+    path('api/user/me/', user_info, name='user_info'),
+    path('api/health/', health_check, name='health_check'),
+]
