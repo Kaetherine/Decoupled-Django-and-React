@@ -1,0 +1,68 @@
+/* ArticleList Container */
+.article-list-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Icon Buttons for Article Actions */
+.icon-button {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+
+.icon-button:hover {
+  background-color: #f8f9fa;
+  border-color: #999;
+}
+
+.icon-button:active {
+  background-color: #e9ecef;
+}
+
+.icon-button svg {
+  width: 16px;
+  height: 16px;
+  fill: #999; /* Helleres Grau */
+}
+
+.icon-button:hover svg {
+  fill: #333;
+}
+
+/* Container für die Buttons am rechten Rand */
+.article-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Specific styles for delete button */
+.delete-button:hover {
+  background-color: #fff5f5;
+  border-color: #dc3545;
+}
+
+.delete-button:hover svg {
+  fill: #dc3545;
+}
+
+/* Specific styles for edit button */
+.edit-button:hover {
+  background-color: #f0f8ff;
+  border-color: #007bff;
+}
+
+.edit-button:hover svg {
+  fill: #007bff;
+} 
