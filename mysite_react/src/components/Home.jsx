@@ -1,4 +1,5 @@
 import React from 'react';
+import './Home.css';
 
 function Home() {
   return (
@@ -7,11 +8,7 @@ function Home() {
         <br></br>
         <br></br>
         <div>
-          <div style={{ 
-            width: '60%', 
-            margin: '0 auto',
-            padding: '20px'
-          }}>
+          <div className="home-text-container">
             <p>
             GrokNotes is a personal tool I built around the functionality
             of captureing and structureing technical notes. It was built as a proof of concept

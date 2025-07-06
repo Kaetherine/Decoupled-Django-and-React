@@ -35,6 +35,18 @@
   padding: 2rem;
 }
 
+/* Loading and Error States */
+.loading-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-container {
+  padding: 2rem;
+  text-align: center;
+  color: red;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

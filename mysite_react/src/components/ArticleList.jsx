@@ -28,11 +28,7 @@ function ArticleList(props) {
     )
 
     return (
-        <div style={{ 
-            width: '80%', 
-            margin: '0 auto',
-            padding: '20px'
-        }}>
+        <div className="article-list-container">
             {props.articles && props.articles.map((article) => {
                 return (
                     <div key={article.id}>
