@@ -35,41 +35,58 @@ function ArticleList(props) {
 
     return (
         <div className="article-list-container">
-            <div className="new-article-section">
-                <button 
-                    className="new-article-btn"
-                    onClick={props.startCreateArticle}
-                    title="Add Article"
-                >
-                    <PlusIcon />
-                </button>
-            </div>
+            {!props.showSearchInfo && (
+                <div className="new-article-section">
+                    <button 
+                        className="new-article-btn"
+                        onClick={props.startCreateArticle}
+                        title="Add Article"
+                    >
+                        <PlusIcon />
+                    </button>
+                </div>
+            )}
             
-            {props.articles && props.articles.map((article) => {
-                return (
-                    <div key={article.id}>
-                        <h2>{article.title}</h2>
-                        <p>{article.description}</p>
-                        <div className="article-actions">
-                            <button 
-                                className="icon-button edit-button" 
-                                onClick={() => editBtn(article)}
-                                title="Edit Article"
-                            >
-                                <EditIcon />
-                            </button>
-                            <button 
-                                onClick={() => deleteBtn(article)} 
-                                className="icon-button delete-button"
-                                title="Delete Article"
-                            >
-                                <DeleteIcon />
-                            </button>
+            {props.articles && props.articles.length > 0 ? (
+                props.articles.map((article) => {
+                    return (
+                        <div key={article.id}>
+                            <h2>{article.title}</h2>
+                            <p>{article.description}</p>
+                            <div className="article-actions">
+                                <button 
+                                    className="icon-button edit-button" 
+                                    onClick={() => editBtn(article)}
+                                    title="Edit Article"
+                                >
+                                    <EditIcon />
+                                </button>
+                                <button 
+                                    onClick={() => deleteBtn(article)} 
+                                    className="icon-button delete-button"
+                                    title="Delete Article"
+                                >
+                                    <DeleteIcon />
+                                </button>
+                            </div>
+                            <hr></hr>
                         </div>
-                        <hr></hr>
-                    </div>
-                )
-            })}
+                    )
+                })
+            ) : (
+                <div className="no-articles">
+                    <p>{props.showSearchInfo ? 'No articles found matching your search.' : 'No articles yet. Create your first article!'}</p>
+                    {!props.showSearchInfo && (
+                        <button 
+                            className="new-article-btn"
+                            onClick={props.startCreateArticle}
+                            title="Add Article"
+                        >
+                            <PlusIcon />
+                        </button>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

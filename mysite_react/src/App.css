@@ -32,7 +32,7 @@
 }
 
 .main-content {
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
 }
 
 /* Loading and Error States */
@@ -45,6 +45,40 @@
   padding: 2rem;
   text-align: center;
   color: red;
+}
+
+/* Search Info Styles */
+.search-info {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+}
+
+.search-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-search-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 15px;
+}
+
+.clear-search-btn:hover {
+  background-color: #5a6268;
 }
 
 .logo {

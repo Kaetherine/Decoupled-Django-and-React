@@ -30,6 +30,22 @@ export class APIService {
         }
     }
 
+    // Search articles
+    static async searchArticles(query) {
+        if (!query || query.trim() === '') {
+            return { results: [], count: 0, message: 'No search query provided' };
+        }
+        
+        const encodedQuery = encodeURIComponent(query.trim());
+        return fetch(`http://localhost:8000/api/search/?q=${encodedQuery}`, {
+            'method': 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(resp => resp.json())
+    }
+
     // User-related methods
     static async getCurrentUser() {
         return await this.request('/user/me/');

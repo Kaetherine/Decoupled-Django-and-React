@@ -3,6 +3,33 @@
   width: 80%;
   margin: 0 auto;
   padding: 20px;
+  padding-top: 20px;
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 20px;
+}
+
+/* Top Controls Layout */
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 20px;
+  padding-top: 0;
+}
+
+/* Article Items */
+.article-item {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.article-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* New Article Button */
@@ -11,7 +38,6 @@
   justify-content: flex-end;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #e9ecef;
 }
 
 .new-article-btn {
@@ -26,6 +52,7 @@
   width: 36px;
   height: 36px;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .new-article-btn:hover {
@@ -45,6 +72,25 @@
 
 .new-article-btn:hover svg {
   fill: #28a745;
+}
+
+/* No Articles Message */
+.no-articles {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.no-articles p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.no-articles .new-article-btn {
+  margin: 0 auto;
 }
 
 /* Icon Buttons for Article Actions */
@@ -107,4 +153,12 @@
 
 .edit-button:hover svg {
   fill: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .top-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
 } 
