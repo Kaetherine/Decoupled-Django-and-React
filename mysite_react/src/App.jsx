@@ -65,7 +65,7 @@ function App() {
 
   if (isLoading) {
     return (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <div className="main-content" style={{ padding: '2rem', textAlign: 'center' }}>
         <h2>Loading articles...</h2>
       </div>
     )
@@ -73,7 +73,7 @@ function App() {
 
   if (error) {
     return (
-      <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>
+      <div className="main-content" style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>
         <h2>Error: {error}</h2>
         <button onClick={() => window.location.reload()}>Retry</button>
       </div>
@@ -81,7 +81,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="main-content">
       <br></br>
       <br></br>
       <div className="App">

@@ -15,6 +15,7 @@
   margin-right: 0;
   color: black;
   font-family: 'Raleway', sans-serif;
+  padding: 2rem;
 }
 
 .link {
@@ -25,9 +26,13 @@
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
   background-color: white;
+}
+
+.main-content {
+  padding: 2rem;
 }
 
 .logo {
