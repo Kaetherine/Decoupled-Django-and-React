@@ -28,31 +28,31 @@ function ArticleList(props) {
     )
 
     return (
-        <div>
+        <div style={{ 
+            width: '80%', 
+            margin: '0 auto',
+            padding: '20px'
+        }}>
             {props.articles && props.articles.map((article) => {
                 return (
                     <div key={article.id}>
                         <h2>{article.title}</h2>
                         <p>{article.description}</p>
-                        <div className="row">
-                            <div className="col-md-1">
-                                <button 
-                                    className="icon-button edit-button" 
-                                    onClick={() => editBtn(article)}
-                                    title="Edit Article"
-                                >
-                                    <EditIcon />
-                                </button>
-                            </div>
-                            <div className="col">
-                                <button 
-                                    onClick={() => deleteBtn(article)} 
-                                    className="icon-button delete-button"
-                                    title="Delete Article"
-                                >
-                                    <DeleteIcon />
-                                </button>
-                            </div>
+                        <div className="article-actions">
+                            <button 
+                                className="icon-button edit-button" 
+                                onClick={() => editBtn(article)}
+                                title="Edit Article"
+                            >
+                                <EditIcon />
+                            </button>
+                            <button 
+                                onClick={() => deleteBtn(article)} 
+                                className="icon-button delete-button"
+                                title="Delete Article"
+                            >
+                                <DeleteIcon />
+                            </button>
                         </div>
                         <hr></hr>
                     </div>

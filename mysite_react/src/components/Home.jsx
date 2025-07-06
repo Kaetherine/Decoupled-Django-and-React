@@ -7,13 +7,17 @@ function Home() {
         <br></br>
         <br></br>
         <div>
-          <div>
-            <a href="https://www.djangoproject.com/" target="_blank">
-              <img src="src\assets\django-logo-positive.png" className="logo" alt="django logo" />
-            </a>
-            <a href="https://reactjs.org" target="_blank">
-              <img src="src\assets\react.svg" className="logo react" alt="React logo" />
-            </a>
+          <div style={{ 
+            width: '60%', 
+            margin: '0 auto',
+            padding: '20px'
+          }}>
+            <p>
+            GrokNotes is a personal tool I built around the functionality
+            of captureing and structureing technical notes. It was built as a proof of concept
+            to validate that a decoupled multi-page-application can be built 
+            using Django and React.
+            </p>
           </div>
         </div>
       </div>
