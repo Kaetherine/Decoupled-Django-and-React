@@ -43,45 +43,56 @@ function Form(props) {
         }
     }
 
+    // SVG Icons
+    const CheckIcon = () => (
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+    );
+
+    const CancelIcon = () => (
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+    );
+
     return (
         <div className="form-container">
-            <div className="mb-3">
-                <h3 className="form-label">
-                    {props.article ? 'Edit your article:' : 'Create a new article:'}
-                </h3>
-                <input 
-                    type="text" 
-                    className="form-control" 
-                    id="title" 
-                    placeholder="Enter article title" 
-                    value={title} 
-                    onChange={e => setTitle(e.target.value)}
-                />
-                <br></br>
-                <textarea 
-                    className="form-control" 
-                    id="description" 
-                    placeholder="Enter article description" 
-                    rows="5" 
-                    value={description} 
-                    onChange={e => setDescription(e.target.value)}
-                />
-                <br></br>
-                <div className="form-actions">
-                    <button 
-                        onClick={handleSubmit} 
-                        className="btn btn-primary"
-                        disabled={!title.trim() || !description.trim()}
-                    >
-                        {props.article ? 'Update Article' : 'Create Article'}
-                    </button>
-                    <button 
-                        onClick={props.cancelEdit} 
-                        className="btn btn-secondary"
-                    >
-                        Cancel
-                    </button>
-                </div>
+            <h3>
+                {props.article ? 'Edit your article:' : 'Create a new article:'}
+            </h3>
+            <input 
+                type="text" 
+                className="form-control" 
+                id="title" 
+                placeholder="Enter article title" 
+                value={title} 
+                onChange={e => setTitle(e.target.value)}
+            />
+            <textarea 
+                className="form-control textarea" 
+                id="description" 
+                placeholder="Enter article description" 
+                rows="5" 
+                value={description} 
+                onChange={e => setDescription(e.target.value)}
+            />
+            <div className="form-actions">
+                <button 
+                    onClick={handleSubmit} 
+                    className="form-icon-button btn-primary-icon"
+                    disabled={!title.trim() || !description.trim()}
+                    title={props.article ? 'Update Article' : 'Create Article'}
+                >
+                    <CheckIcon />
+                </button>
+                <button 
+                    onClick={props.cancelEdit} 
+                    className="form-icon-button btn-secondary-icon"
+                    title="Cancel"
+                >
+                    <CancelIcon />
+                </button>
             </div>
         </div>
     )

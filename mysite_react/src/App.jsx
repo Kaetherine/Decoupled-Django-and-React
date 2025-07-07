@@ -59,12 +59,6 @@ function App() {
     const startCreateArticle = () => {
       setEditArticles(null) // Clear any existing edit
       setShowCreateForm(true)
-      // Scroll to form after state update
-      setTimeout(() => {
-        if (formRef.current) {
-          formRef.current.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
     }
 
     const handleSearch = async (query) => {
@@ -131,12 +125,6 @@ function App() {
   const editBtn = (article) => {
     setShowCreateForm(false) // Hide create form if showing
     setEditArticles(article)
-    // Scroll to form after state update
-    setTimeout(() => {
-      if (formRef.current) {
-        formRef.current.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
   }
 
   if (isLoading) {
@@ -179,6 +167,21 @@ function App() {
             </button>
           </div>
           
+          {editArticle && (
+            <Form 
+              article={editArticle} 
+              updatedInformation={updatedInformation}
+              cancelEdit={cancelOperation}
+            />
+          )}
+          
+          {showCreateForm && (
+            <Form 
+              articleCreated={articleCreated}
+              cancelEdit={cancelOperation}
+            />
+          )}
+          
           {isSearchMode && (
             <div className="search-info">
               <p>
@@ -186,12 +189,6 @@ function App() {
                   ? `Found ${searchResults.length} articles matching "${searchQuery}"` 
                   : `No articles found matching "${searchQuery}"`
                 }
-                <button 
-                  className="clear-search-btn"
-                  onClick={handleClearSearch}
-                >
-                  Show all articles
-                </button>
               </p>
             </div>
           )}
@@ -242,25 +239,6 @@ function App() {
             </div>
           )}
         </div>
-        
-        {editArticle && (
-          <div ref={formRef}>
-            <Form 
-              article={editArticle} 
-              updatedInformation={updatedInformation}
-              cancelEdit={cancelOperation}
-            />
-          </div>
-        )}
-        
-        {showCreateForm && (
-          <div ref={formRef}>
-            <Form 
-              articleCreated={articleCreated}
-              cancelEdit={cancelOperation}
-            />
-          </div>
-        )}
       </div>
     </div>
   )
