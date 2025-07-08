@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { APIService } from '../APIService'
 import './ArticleList.css'
 
@@ -25,12 +27,14 @@ function ArticleList({ articles, onEdit, onDelete, onArticleClick, showSearchInf
                     return (
                         <div key={article.id} className="article-item">
                             <h2>{article.title}</h2>
-                            <p 
+                            <div 
                                 className="article-description" 
                                 onClick={() => handleArticleTextClick(article)}
                             >
-                                {article.description}
-                            </p>
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {article.description}
+                                </ReactMarkdown>
+                            </div>
                             <div className="article-actions">
                                 <button 
                                     className="icon-button edit-button" 

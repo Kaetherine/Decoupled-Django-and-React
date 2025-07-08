@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import './App.css'
 import ArticleList from './components/ArticleList'
 import Form from './components/Form'
@@ -222,7 +224,9 @@ function App() {
           </div>
           <h1>{focusedArticle.title}</h1>
           <div className={`focus-text align-${textAlign}`}>
-            {focusedArticle.description}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {focusedArticle.description}
+            </ReactMarkdown>
           </div>
         </div>
       </div>

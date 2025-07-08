@@ -72,8 +72,8 @@ function Form(props) {
             <textarea 
                 className="form-control textarea" 
                 id="description" 
-                placeholder="Enter article description" 
-                rows="5" 
+                placeholder="Enter article description (Markdown supported: **bold**, *italic*, # headers, etc.)" 
+                rows="8" 
                 value={description} 
                 onChange={e => setDescription(e.target.value)}
             />
