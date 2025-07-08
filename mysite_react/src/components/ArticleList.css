@@ -36,9 +36,9 @@
   padding-bottom: 0;
 }
 
-/* Article Description - anklickbar mit 17% Höhe */
+/* Article Description - anklickbar mit 20% Höhe */
 .article-description {
-  height: 17vh;
+  max-height: 20vh;
   overflow: hidden;
   cursor: pointer;
   padding: 0;
