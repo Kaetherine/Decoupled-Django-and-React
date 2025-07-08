@@ -1,25 +1,13 @@
+/* ===================================
+   Global Styles
+   =================================== */
+
 .App {
   max-width: auto;
   text-align: left;
   margin-left: 0;
   color: black;
   font-family: 'Raleway', sans-serif;
-  /* background-color: rgb(80, 135, 118); */
-}
-
-.App-header {
-  width: 100%;
-  max-width: 100%;
-  text-align: center;
-  margin-left: 0;
-  margin-right: 0;
-  color: black;
-  font-family: 'Raleway', sans-serif;
-  padding: 2rem;
-}
-
-.app-link {
-  color: black;
 }
 
 #root {
@@ -35,7 +23,10 @@
   padding: 0 2rem 2rem 2rem;
 }
 
-/* Loading and Error States */
+/* ===================================
+   Loading and Error States
+   =================================== */
+
 .loading-container {
   padding: 2rem;
   text-align: center;
@@ -47,7 +38,10 @@
   color: red;
 }
 
-/* Search Info Styles */
+/* ===================================
+   Search Info
+   =================================== */
+
 .search-info {
   margin-bottom: 20px;
   padding: 0;
@@ -60,56 +54,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.clear-search-btn {
-  background-color: white;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 8px 16px;
-  border-radius: 2px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-left: 15px;
-}
-
-.clear-search-btn:hover {
-  background-color: #f8f9fa;
-  border-color: #999;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #b4fffdaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

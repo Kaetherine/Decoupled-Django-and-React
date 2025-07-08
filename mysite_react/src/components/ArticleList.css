@@ -1,4 +1,7 @@
-/* ArticleList Container */
+/* ===================================
+   Main Container
+   =================================== */
+
 .article-list-container {
   width: 80%;
   margin: 0 auto;
@@ -6,12 +9,10 @@
   padding-top: 20px;
 }
 
-/* Search Section */
-.search-section {
-  margin-bottom: 20px;
-}
+/* ===================================
+   Top Controls Layout
+   =================================== */
 
-/* Top Controls Layout */
 .top-controls {
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,10 @@
   padding-top: 0;
 }
 
-/* Article Items */
+/* ===================================
+   Article Items
+   =================================== */
+
 .article-item {
   margin-bottom: 30px;
   padding-bottom: 20px;
@@ -32,13 +36,142 @@
   padding-bottom: 0;
 }
 
-/* New Article Button */
-.new-article-section {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+/* Article Description - anklickbar mit 17% Höhe */
+.article-description {
+  height: 17vh;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  position: relative;
 }
+
+.article-description:hover {
+  overflow-y: auto;
+}
+
+/* Hellere Scrollbar */
+.article-description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.article-description::-webkit-scrollbar-track {
+  background: #fcfcfc;
+}
+
+.article-description::-webkit-scrollbar-thumb {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.article-description::-webkit-scrollbar-thumb:hover {
+  background: #e8e8e8;
+}
+
+/* ===================================
+   Focus View - Reader Mode
+   =================================== */
+
+.focus-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.focus-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.focus-header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.focus-align-btn,
+.focus-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.focus-align-btn:hover,
+.focus-close:hover {
+  color: #333;
+}
+
+.focus-align-btn svg,
+.focus-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.focus-content h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 30px 0;
+  padding-right: 100px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.focus-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+/* Textausrichtungs-Klassen */
+.align-justify {
+  text-align: justify;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* ===================================
+   Button Styles
+   =================================== */
 
 .new-article-btn {
   background-color: white;
@@ -74,26 +207,6 @@
   fill: #28a745;
 }
 
-/* No Articles Message */
-.no-articles {
-  text-align: center;
-  padding: 40px 20px;
-  color: #6c757d;
-  background-color: #f8f9fa;
-  border-radius: 2px;
-  border: 1px solid #e9ecef;
-  margin-top: 20px;
-}
-
-.no-articles p {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.no-articles .new-article-btn {
-  margin: 0 auto;
-}
-
 /* Icon Buttons for Article Actions */
 .icon-button {
   background-color: white;
@@ -122,31 +235,20 @@
 .icon-button svg {
   width: 16px;
   height: 16px;
-  fill: #999; /* Helleres Grau */
+  fill: #999;
 }
 
 .icon-button:hover svg {
   fill: #333;
 }
 
-/* Container für die Buttons am rechten Rand */
 .article-actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
 }
 
-/* Specific styles for delete button */
-.delete-button:hover {
-  background-color: #fff5f5;
-  border-color: #dc3545;
-}
-
-.delete-button:hover svg {
-  fill: #dc3545;
-}
-
-/* Specific styles for edit button */
+/* Edit Button */
 .edit-button:hover {
   background-color: #f0f8ff;
   border-color: #007bff;
@@ -156,10 +258,59 @@
   fill: #007bff;
 }
 
-/* Responsive Design */
+/* Delete Button */
+.delete-button:hover {
+  background-color: #fff5f5;
+  border-color: #dc3545;
+}
+
+.delete-button:hover svg {
+  fill: #dc3545;
+}
+
+/* ===================================
+   No Articles State
+   =================================== */
+
+.no-articles {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 2px;
+  border: 1px solid #e9ecef;
+  margin-top: 20px;
+}
+
+.no-articles p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.no-articles .new-article-btn {
+  margin: 0 auto;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+
 @media (max-width: 768px) {
   .top-controls {
     flex-direction: column;
     gap: 15px;
+  }
+  
+  .focus-content {
+    padding: 20px 15px;
+  }
+  
+  .focus-content h1 {
+    font-size: 28px;
+    padding-right: 50px;
+  }
+  
+  .focus-text {
+    font-size: 16px;
   }
 } 

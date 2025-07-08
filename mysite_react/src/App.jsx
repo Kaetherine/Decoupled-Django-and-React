@@ -16,6 +16,8 @@ function App() {
   const [showCreateForm, setShowCreateForm] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchMode, setIsSearchMode] = useState(false)
+  const [focusedArticle, setFocusedArticle] = useState(null)
+  const [textAlign, setTextAlign] = useState('justify') // 'justify', 'left', 'right', 'center'
   const formRef = useRef(null)
 
     const updatedInformation = (article) => {
@@ -127,6 +129,60 @@ function App() {
     setEditArticles(article)
   }
 
+  const handleArticleTextClick = (article) => {
+    setFocusedArticle(article)
+  }
+
+  const closeFocusView = () => {
+    setFocusedArticle(null)
+  }
+
+  const toggleTextAlign = () => {
+    const alignments = ['justify', 'left', 'center', 'right']
+    const currentIndex = alignments.indexOf(textAlign)
+    const nextIndex = (currentIndex + 1) % alignments.length
+    setTextAlign(alignments[nextIndex])
+  }
+
+  const getTextAlignIcon = () => {
+    switch(textAlign) {
+      case 'justify':
+        return (
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        )
+      case 'left':
+        return (
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="3" y1="6" x2="15" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="15" y2="18"/>
+          </svg>
+        )
+      case 'center':
+        return (
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="6" y1="6" x2="18" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="6" y1="18" x2="18" y2="18"/>
+          </svg>
+        )
+      case 'right':
+        return (
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line x1="9" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="9" y1="18" x2="21" y2="18"/>
+          </svg>
+        )
+      default:
+        return null
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="main-content loading-container">
@@ -140,6 +196,35 @@ function App() {
       <div className="main-content error-container">
         <h2>Error: {error}</h2>
         <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    )
+  }
+
+  // Focus View für Artikel
+  if (focusedArticle) {
+    return (
+      <div className="focus-view" onClick={closeFocusView}>
+        <div className="focus-content" onClick={(e) => e.stopPropagation()}>
+          <div className="focus-header">
+            <button 
+              className="focus-align-btn" 
+              onClick={toggleTextAlign}
+              title={`Text alignment: ${textAlign}`}
+            >
+              {getTextAlignIcon()}
+            </button>
+            <button className="focus-close" onClick={closeFocusView}>
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <h1>{focusedArticle.title}</h1>
+          <div className={`focus-text align-${textAlign}`}>
+            {focusedArticle.description}
+          </div>
+        </div>
       </div>
     )
   }
@@ -193,51 +278,14 @@ function App() {
             </div>
           )}
           
-          {displayedArticles && displayedArticles.length > 0 ? (
-            displayedArticles.map((article) => {
-              return (
-                <div key={article.id} className="article-item">
-                  <h2>{article.title}</h2>
-                  <p>{article.description}</p>
-                  <div className="article-actions">
-                    <button 
-                      className="icon-button edit-button" 
-                      onClick={() => editBtn(article)}
-                      title="Edit Article"
-                    >
-                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                      </svg>
-                    </button>
-                    <button 
-                      onClick={() => deleteBtn(article)} 
-                      className="icon-button delete-button"
-                      title="Delete Article"
-                    >
-                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              )
-            })
-          ) : (
-            <div className="no-articles">
-              <p>{isSearchMode ? 'No articles found matching your search.' : 'No articles yet. Create your first article!'}</p>
-              {!isSearchMode && (
-                <button 
-                  className="new-article-btn"
-                  onClick={startCreateArticle}
-                  title="Add Article"
-                >
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                  </svg>
-                </button>
-              )}
-            </div>
-          )}
+          <ArticleList 
+            articles={displayedArticles}
+            onEdit={editBtn}
+            onDelete={deleteBtn}
+            onArticleClick={handleArticleTextClick}
+            showSearchInfo={isSearchMode}
+            startCreateArticle={startCreateArticle}
+          />
         </div>
       </div>
     </div>
