@@ -1,9 +1,9 @@
-import React from 'react'
+ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { APIService } from '../APIService'
+ import { APIService } from '../APIService'
 import './ArticleList.css'
-
+ 
 function ArticleList({ articles, onEdit, onDelete, onArticleClick, showSearchInfo, startCreateArticle }) {
 
     const editBtn = (article) => {
@@ -15,18 +15,18 @@ function ArticleList({ articles, onEdit, onDelete, onArticleClick, showSearchInf
       .then(() => onDelete(article))
       .catch(error => console.log(error))
     }
-
+     
     const handleArticleTextClick = (article) => {
         onArticleClick(article)
-    }
+ }
 
-    return (
+   return (
         <>
             {articles && articles.length > 0 ? (
                 articles.map((article) => {
-                    return (
+        return (
                         <div key={article.id} className="article-item">
-                            <h2>{article.title}</h2>
+        <h2>{article.title}</h2>
                             <div 
                                 className="article-description" 
                                 onClick={() => handleArticleTextClick(article)}
@@ -54,9 +54,9 @@ function ArticleList({ articles, onEdit, onDelete, onArticleClick, showSearchInf
                                         <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                                     </svg>
                                 </button>
-                            </div>
-                        </div>
-                    )
+                </div>
+        </div>
+        )
                 })
             ) : (
                 <div className="no-articles">
@@ -72,11 +72,11 @@ function ArticleList({ articles, onEdit, onDelete, onArticleClick, showSearchInf
                             </svg>
                         </button>
                     )}
-                </div>
+     </div>
             )}
         </>
-    )
-}
-
-export default ArticleList
+   )
+ }
+ 
+ export default ArticleList
  

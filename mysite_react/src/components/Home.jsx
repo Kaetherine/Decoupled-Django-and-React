@@ -4,9 +4,9 @@ import './Home.css';
 function Home() {
   return (
     <div className="main-content">
-      <div className="App-header">
-        <br></br>
-        <br></br>
+    <div className="App-header">
+      <br></br>
+      <br></br>
         <div>
           <div className="home-text-container">
             <p>
