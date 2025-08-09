@@ -19,7 +19,7 @@ function Navbar() {
       <div className="navbar-container">
         {/* Logo/Brand */}
         <Link to="/" className="navbar-brand">
-          MyNotes
+          Mindr
         </Link>
 
         {/* Mobile Menu Button */}

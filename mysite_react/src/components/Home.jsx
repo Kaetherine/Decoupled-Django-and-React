@@ -10,7 +10,7 @@ function Home() {
         <div>
           <div className="home-text-container">
             <p>
-            GrokNotes is a personal tool I built around the functionality
+            Mindr is a personal tool I built around the functionality
             of captureing and structureing technical notes. It was built as a proof of concept
             to validate that a decoupled multi-page-application can be built 
             using Django and React.
