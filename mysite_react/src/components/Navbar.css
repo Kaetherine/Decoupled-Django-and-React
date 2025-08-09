@@ -40,7 +40,7 @@ nav.navbar .navbar-container .navbar-brand {
 }
 
 nav.navbar .navbar-container .navbar-brand:hover {
-  color: #007bff;
+  color: #4a4fa7;
   text-decoration: none;
 }
 
@@ -49,7 +49,8 @@ nav.navbar .navbar-container .navbar-menu {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
@@ -83,8 +84,23 @@ nav.navbar .navbar-container .navbar-menu .navbar-nav .navbar-link:hover {
 }
 
 nav.navbar .navbar-container .navbar-menu .navbar-nav .navbar-link.active {
-  color: #0056b3;
+  color: #4a4fa7;
   font-weight: 400;
+}
+
+/* Left side navigation */
+nav.navbar .navbar-container .navbar-menu .navbar-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Right side navigation (Auth Links) */
+nav.navbar .navbar-container .navbar-menu .navbar-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
 }
 
 /* Mobile Toggle Button - hidden by default */

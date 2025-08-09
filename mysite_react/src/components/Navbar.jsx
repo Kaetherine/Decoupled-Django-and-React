@@ -35,7 +35,8 @@ function Navbar() {
 
         {/* Navigation Links */}
         <div className={`navbar-menu ${isMenuOpen ? 'is-active' : ''}`}>
-          <div className="navbar-nav">
+          {/* Left side - Main navigation */}
+          <div className="navbar-nav navbar-nav-left">
             <Link 
               to="/" 
               className={`navbar-link ${isActive('/')}`}
@@ -50,6 +51,24 @@ function Navbar() {
             >
               Articles
             </Link>
+          </div>
+          
+          {/* Right side - Auth Links */}
+          <div className="navbar-nav navbar-nav-right">
+            <a 
+              href="/auth/login/" 
+              className="navbar-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login
+            </a>
+            <a 
+              href="/auth/register/" 
+              className="navbar-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Register
+            </a>
           </div>
         </div>
       </div>

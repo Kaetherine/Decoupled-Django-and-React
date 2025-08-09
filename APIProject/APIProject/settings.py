@@ -54,6 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Auth-Konfiguration für Decoupled App
+# Nach Login zur React-App (Port 8080) weiterleiten
+LOGIN_REDIRECT_URL = 'http://localhost:8080/'  # React App
+LOGOUT_REDIRECT_URL = '/auth/login/'  # Django Login bleibt in Django
+
 # E-Mail Konfiguration für Password Reset
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -73,7 +78,7 @@ ROOT_URLCONF = 'APIProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'APIProject' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

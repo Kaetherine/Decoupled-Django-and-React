@@ -13,5 +13,19 @@ export default defineConfig({
   strictPort: true,
   host: true,
   origin: "http://localhost:8080",
+  // Proxy Auth-Requests zu Django Backend
+  proxy: {
+    '/auth': {
+      target: 'http://apiproject:8000',  // Container-to-Container communication
+      changeOrigin: true,
+      secure: false
+    },
+    // Proxy API-Requests zu Django Backend  
+    '/api': {
+      target: 'http://apiproject:8000',
+      changeOrigin: true,
+      secure: false
+    }
+  }
  },
 });
