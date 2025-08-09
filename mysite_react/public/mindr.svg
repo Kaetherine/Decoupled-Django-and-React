@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Farben -->
+  <defs>
+    <style>
+      .berry { fill: #1e4fa3; stroke: #000000; stroke-width: 2; }
+      .leaf { fill: #146b3a; stroke: #000000; stroke-width: 2; }
+      .detail { fill: none; stroke: #000000; stroke-width: 2; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Linke Beere -->
+  <circle class="berry" cx="100" cy="140" r="50"/>
+  <path class="detail" d="M80 160 q20 -20 40 0"/>
+
+  <!-- Rechte Beere -->
+  <circle class="berry" cx="160" cy="110" r="50"/>
+  <path class="detail" d="M140 130 q20 -20 40 0"/>
+
+  <!-- Blätter -->
+  <ellipse class="leaf" cx="80" cy="60" rx="20" ry="40" transform="rotate(-20 80 60)"/>
+  <ellipse class="leaf" cx="120" cy="50" rx="20" ry="40" transform="rotate(20 120 50)"/>
+</svg>
