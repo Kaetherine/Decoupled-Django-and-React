@@ -11,6 +11,8 @@ import {
 } from "react-router-dom"
 import Home from './components/Home'
 import Navbar from './components/Navbar'
+import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -23,6 +25,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<App />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

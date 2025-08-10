@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
   border-radius: 20px;
   padding: 0 12px;
   transition: border-color 0.2s ease;
@@ -80,7 +80,7 @@
 
 .search-button {
   background-color: white !important;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
   border-radius: 2px;
   padding: 8px;
   cursor: pointer;
@@ -94,8 +94,9 @@
 }
 
 .search-button:hover:not(:disabled) {
-  background-color: #f8f9fa !important;
-  border-color: #999;
+  /* Button stays the same - only icon zooms */
+  background-color: white !important;
+  border-color: rgba(203, 213, 225, 0.6);
 }
 
 .search-button:disabled {
@@ -108,10 +109,13 @@
   width: 16px;
   height: 16px;
   fill: #999;
+  transition: transform 0.15s ease;
 }
 
 .search-button:hover:not(:disabled) svg {
-  fill: #333;
+  /* Fast icon zoom effect - same as other buttons */
+  transform: scale(1.15);
+  fill: #999; /* Keep original color */
 }
 
 /* Responsive Design */

@@ -44,7 +44,7 @@
   padding: 0;
   border: none;
   background: transparent;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   white-space: pre-wrap;
   line-height: 1.4;
   position: relative;
@@ -380,12 +380,14 @@
 }
 
 /* ===================================
-   Button Styles
+   Button Styles - Unified
    =================================== */
 
+/* Base button style for all icon buttons */
+.icon-button,
 .new-article-btn {
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
   border-radius: 2px;
   padding: 8px;
   cursor: pointer;
@@ -394,88 +396,50 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  transition: all 0.2s ease;
   flex-shrink: 0;
+  position: relative;
 }
 
+.icon-button {
+  margin-left: 8px;
+}
+
+/* Hover effects - unified for all buttons */
+.icon-button:hover,
 .new-article-btn:hover {
-  background-color: #f0f8ff;
-  border-color: #28a745;
+  background-color: white;
+  border-color: rgba(203, 213, 225, 0.6);
 }
 
+.icon-button:hover svg,
+.new-article-btn:hover svg {
+  transform: scale(1.15);
+}
+
+/* Active state */
+.icon-button:active,
 .new-article-btn:active {
   background-color: #e9ecef;
 }
 
+/* SVG styling */
+.icon-button svg,
 .new-article-btn svg {
   width: 16px;
   height: 16px;
   fill: #999;
+  transition: transform 0.15s ease;
 }
 
-.new-article-btn:hover svg {
-  fill: #28a745;
-}
-
-/* Icon Buttons for Article Actions */
-.icon-button {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  padding: 8px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  transition: all 0.2s ease;
-  margin-left: 8px;
-}
-
-.icon-button:hover {
-  background-color: #f8f9fa;
-  border-color: #999;
-}
-
-.icon-button:active {
-  background-color: #e9ecef;
-}
-
-.icon-button svg {
-  width: 16px;
-  height: 16px;
-  fill: #999;
-}
-
-.icon-button:hover svg {
-  fill: #333;
+/* Plus icon specific styling */
+.new-article-btn svg {
+  stroke-width: 1px;
 }
 
 .article-actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
-}
-
-/* Edit Button */
-.edit-button:hover {
-  background-color: #f0f8ff;
-  border-color: #007bff;
-}
-
-.edit-button:hover svg {
-  fill: #007bff;
-}
-
-/* Delete Button */
-.delete-button:hover {
-  background-color: #fff5f5;
-  border-color: #dc3545;
-}
-
-.delete-button:hover svg {
-  fill: #dc3545;
 }
 
 /* ===================================

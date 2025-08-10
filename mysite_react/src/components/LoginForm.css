@@ -1,0 +1,185 @@
+/* Minimalistic Frosty/Icy Design with white background like app */
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem 1rem;
+  background: white;
+}
+
+.login-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #334155;
+  font-size: 1.75rem;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #64748b;
+  font-weight: 400;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0 12px;
+  height: 36px;
+  border: 1px solid rgba(203, 213, 225, 0.6);
+  border-radius: 20px;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  background-color: white;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-group input:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder {
+  color: #6c757d;
+}
+
+/* Prismatex-style button with shimmer animation */
+.login-button {
+  width: 100%;
+  background: linear-gradient(135deg, #dfe6ff, #e9e1f2, #f3e8fc, #e8fcf7);
+  background-size: 300% 300%;
+  color: #fff;
+  padding: 0.625rem 1rem;
+  height: 44px;
+  border: none;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-position 0.5s ease, box-shadow 0.5s ease;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:hover:not(:disabled) {
+  animation: shimmer 3s infinite linear;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.login-button:disabled {
+  background-color: rgba(248, 250, 252, 0.5);
+  color: #cbd5e1;
+  cursor: not-allowed;
+  border-color: rgba(203, 213, 225, 0.3);
+}
+
+.login-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.2);
+}
+
+/* Minimalistic error styling */
+.error-message {
+  background-color: rgba(254, 215, 215, 0.8);
+  color: #dc2626;
+  padding: 0.875rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  font-size: 0.875rem;
+  font-weight: 300;
+  backdrop-filter: blur(10px);
+}
+
+/* Minimalistic form links */
+.form-links {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.form-links a {
+  color: #64748b;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.form-links a:hover {
+  color: #334155;
+  text-decoration: underline;
+}
+
+.form-links span {
+  color: #cbd5e1;
+  margin: 0 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-form-container {
+    padding: 1rem 0.5rem;
+    min-height: 50vh;
+  }
+  
+  .login-form {
+    padding: 2rem;
+    border-radius: 20px;
+  }
+  
+  .login-form h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-group input {
+    padding: 0 12px;
+    height: 36px;
+    border-radius: 20px;
+  }
+  
+  .login-button {
+    padding: 0.625rem 1rem;
+    height: 40px;
+    border-radius: 2px;
+  }
+}

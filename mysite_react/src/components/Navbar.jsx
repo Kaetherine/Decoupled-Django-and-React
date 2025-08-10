@@ -53,23 +53,23 @@ function Navbar() {
             </Link>
           </div>
           
-          {/* Right side - Auth Links */}
-          <div className="navbar-nav navbar-nav-right">
-            <a 
-              href="/auth/login/" 
-              className="navbar-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </a>
-            <a 
-              href="/auth/register/" 
-              className="navbar-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Register
-            </a>
-          </div>
+                           {/* Right side - Auth Links */}
+                 <div className="navbar-nav navbar-nav-right">
+                   <Link
+                     to="/login"
+                     className="navbar-link"
+                     onClick={() => setIsMenuOpen(false)}
+                   >
+                     Login
+                   </Link>
+                   <Link
+                     to="/register"
+                     className="navbar-link"
+                     onClick={() => setIsMenuOpen(false)}
+                   >
+                     Register
+                   </Link>
+                 </div>
         </div>
       </div>
     </nav>

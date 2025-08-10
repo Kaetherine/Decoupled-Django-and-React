@@ -17,7 +17,7 @@
 .form-control {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
   border-radius: 2px;
   font-size: 16px;
   font-family: 'Raleway', sans-serif;
@@ -56,7 +56,7 @@
 /* Icon Button Base Style (like add button) */
 .form-icon-button {
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
   border-radius: 2px;
   padding: 8px;
   cursor: pointer;
@@ -65,8 +65,21 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  transition: all 0.2s ease;
+  transition: background-position 0.5s ease, box-shadow 0.5s ease;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-icon-button:hover:not(:disabled) {
+  /* Button stays the same - only icon zooms */
+  background-color: white;
+  border-color: rgba(203, 213, 225, 0.6);
+}
+
+.form-icon-button:hover:not(:disabled) svg {
+  /* Fast icon zoom effect - same as other buttons */
+  transform: scale(1.15);
 }
 
 .form-icon-button:disabled {
@@ -79,12 +92,13 @@
   width: 16px;
   height: 16px;
   fill: #999;
+  transition: transform 0.15s ease;
 }
 
 /* Primary Button (Create/Save) */
 .btn-primary-icon {
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
 }
 
 .btn-primary-icon:hover:not(:disabled) {
@@ -99,7 +113,7 @@
 /* Secondary Button (Cancel) */
 .btn-secondary-icon {
   background-color: white;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(203, 213, 225, 0.6);
 }
 
 .btn-secondary-icon:hover {
