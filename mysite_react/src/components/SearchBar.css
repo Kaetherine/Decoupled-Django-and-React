@@ -1,8 +1,9 @@
-/* SearchBar Component Styles */
+/* ===================================
+   SearchBar Component Styles
+   =================================== */
+
 .search-bar-container {
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 .search-form {
@@ -11,6 +12,10 @@
   align-items: center;
   width: 100%;
 }
+
+/* ===================================
+   Search Input Field
+   =================================== */
 
 .search-input-wrapper {
   position: relative;
@@ -51,6 +56,10 @@
   cursor: not-allowed;
 }
 
+/* ===================================
+   Clear Button
+   =================================== */
+
 .clear-button {
   background: none;
   border: none;
@@ -72,61 +81,34 @@
   width: 16px;
   height: 16px;
   fill: #6c757d;
+  transition: fill 0.2s ease;
 }
 
 .clear-button:hover svg {
   fill: #dc3545;
 }
 
-.search-button {
-  background-color: white !important;
-  border: 1px solid rgba(203, 213, 225, 0.6);
-  border-radius: 2px;
-  padding: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  height: 36px;
-  width: 36px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* ===================================
+   Search Button - uses unified styles
+   =================================== */
 
-.search-button:hover:not(:disabled) {
-  /* Button stays the same - only icon zooms */
-  background-color: white !important;
-  border-color: rgba(203, 213, 225, 0.6);
-}
-
+/* Search button uses .icon-button from ArticleList.css */
 .search-button:disabled {
-  background-color: white !important;
+  background-color: white;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-.search-button svg {
-  width: 16px;
-  height: 16px;
-  fill: #999;
-  transition: transform 0.15s ease;
-}
+/* ===================================
+   Responsive Design
+   =================================== */
 
-.search-button:hover:not(:disabled) svg {
-  /* Fast icon zoom effect - same as other buttons */
-  transform: scale(1.15);
-  fill: #999; /* Keep original color */
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .search-form {
-    flex-direction: row;
     gap: 8px;
   }
   
   .search-input-wrapper {
-    flex: 1;
     max-width: none;
   }
-} 
+}

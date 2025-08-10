@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
+import './ArticleList.css'; // Import for unified icon-button styles
 
 function SearchBar({ onSearch, onClear, isSearching }) {
     const [query, setQuery] = useState('');
@@ -61,7 +62,7 @@ function SearchBar({ onSearch, onClear, isSearching }) {
                 </div>
                 <button 
                     type="submit" 
-                    className="search-button"
+                    className="icon-button search-button"
                     disabled={!query.trim() || isSearching}
                     title={isSearching ? 'Searching...' : 'Search'}
                 >

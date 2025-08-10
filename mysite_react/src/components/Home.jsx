@@ -11,8 +11,8 @@ function Home() {
           <div className="home-text-container">
             <p>
             Mindr is a personal tool I built around the functionality
-            of captureing and structureing technical notes. It was built as a proof of concept
-            to validate that a decoupled multi-page-application can be built 
+            of capturing and structuring technical notes. I originally built it as a proof of concept
+            to validate if a decoupled multi-page-application can be built 
             using Django and React.
             </p>
           </div>
