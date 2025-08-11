@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Auth.css';
 
-function LoginForm() {
+function PasswordResetConfirmForm() {
   const [formData, setFormData] = useState({
-    username: '',
-    password: ''
+    new_password1: '',
+    new_password2: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,8 +15,8 @@ function LoginForm() {
       ...formData,
       [e.target.name]: e.target.value
     });
-    // Clear error when user starts typing
     if (error) setError('');
+    if (success) setSuccess('');
   };
 
   const handleSubmit = async (e) => {
@@ -25,8 +25,15 @@ function LoginForm() {
     setError('');
     setSuccess('');
 
+    // Validate passwords match
+    if (formData.new_password1 !== formData.new_password2) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch('/api/auth/login/', {
+      const response = await fetch('/api/auth/password-reset-confirm/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,27 +44,23 @@ function LoginForm() {
       const data = await response.json();
 
       if (response.ok) {
-        // Login successful - store token and redirect to Articles
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
+        setSuccess(data.message || 'Password reset successfully');
+        setFormData({ new_password1: '', new_password2: '' }); // Clear form
         
-        console.log('Login successful:', data);
-        
-        // Redirect to Articles page
-        window.location.href = '/articles';
-        
+        // Redirect to login after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/login';
+        }, 2000);
       } else {
-        // Login failed
         if (data.errors) {
-          // Handle DRF serializer errors
           const errorMessages = Object.values(data.errors).flat();
           setError(errorMessages.join(', '));
         } else {
-          setError(data.error || 'Login failed');
+          setError(data.error || 'Password reset confirmation failed');
         }
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Password reset confirm error:', err);
       setError('Network error. Please try again later.');
     } finally {
       setLoading(false);
@@ -67,58 +70,68 @@ function LoginForm() {
   return (
     <div className="auth-form-container">
       <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Login</h2>
-        
+        <h2>Set New Password</h2>
+
         {error && (
           <div className="error-message">
             {error}
           </div>
         )}
 
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            disabled={loading}
-            placeholder="Your username"
-          />
-        </div>
+        {success && (
+          <div className="success-message">
+            {success}
+            <br />
+            <small>Redirecting to login...</small>
+          </div>
+        )}
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="new_password1">New Password:</label>
           <input
             type="password"
-            id="password"
-            name="password"
-            value={formData.password}
+            id="new_password1"
+            name="new_password1"
+            value={formData.new_password1}
             onChange={handleChange}
             required
             disabled={loading}
-            placeholder="Your password"
+            placeholder="Enter new password"
+            minLength="8"
           />
         </div>
 
-        <button 
-          type="submit" 
+        <div className="form-group">
+          <label htmlFor="new_password2">Confirm New Password:</label>
+          <input
+            type="password"
+            id="new_password2"
+            name="new_password2"
+            value={formData.new_password2}
+            onChange={handleChange}
+            required
+            disabled={loading}
+            placeholder="Confirm new password"
+            minLength="8"
+          />
+        </div>
+
+        <button
+          type="submit"
           className="auth-button"
           disabled={loading}
         >
-          {loading ? 'Signing in...' : 'Login'}
+          {loading ? 'Updating...' : 'Update Password'}
         </button>
 
         <div className="form-links">
-          <a href="/password-reset">Forgot password?</a>
+          <a href="/login">Back to Login</a>
           <span> | </span>
-          <a href="/register">Register</a>
+          <a href="/password-reset">Reset Email Again</a>
         </div>
       </form>
     </div>
   );
 }
 
-export default LoginForm;
+export default PasswordResetConfirmForm;

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Auth.css';
 
-function LoginForm() {
+function PasswordResetForm() {
   const [formData, setFormData] = useState({
-    username: '',
-    password: ''
+    email: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,8 +14,8 @@ function LoginForm() {
       ...formData,
       [e.target.name]: e.target.value
     });
-    // Clear error when user starts typing
     if (error) setError('');
+    if (success) setSuccess('');
   };
 
   const handleSubmit = async (e) => {
@@ -26,7 +25,7 @@ function LoginForm() {
     setSuccess('');
 
     try {
-      const response = await fetch('/api/auth/login/', {
+      const response = await fetch('/api/auth/password-reset/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,27 +36,18 @@ function LoginForm() {
       const data = await response.json();
 
       if (response.ok) {
-        // Login successful - store token and redirect to Articles
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        console.log('Login successful:', data);
-        
-        // Redirect to Articles page
-        window.location.href = '/articles';
-        
+        setSuccess(data.message || 'Password reset email sent successfully');
+        setFormData({ email: '' }); // Clear form
       } else {
-        // Login failed
         if (data.errors) {
-          // Handle DRF serializer errors
           const errorMessages = Object.values(data.errors).flat();
           setError(errorMessages.join(', '));
         } else {
-          setError(data.error || 'Login failed');
+          setError(data.error || 'Password reset failed');
         }
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('Password reset error:', err);
       setError('Network error. Please try again later.');
     } finally {
       setLoading(false);
@@ -67,58 +57,50 @@ function LoginForm() {
   return (
     <div className="auth-form-container">
       <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Login</h2>
-        
+        <h2>Reset Password</h2>
+
         {error && (
           <div className="error-message">
             {error}
           </div>
         )}
 
+        {success && (
+          <div className="success-message">
+            {success}
+          </div>
+        )}
+
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="email">Email Address:</label>
           <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
             disabled={loading}
-            placeholder="Your username"
+            placeholder="your@email.com"
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            disabled={loading}
-            placeholder="Your password"
-          />
-        </div>
-
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="auth-button"
           disabled={loading}
         >
-          {loading ? 'Signing in...' : 'Login'}
+          {loading ? 'Sending...' : 'Send Reset Email'}
         </button>
 
         <div className="form-links">
-          <a href="/password-reset">Forgot password?</a>
+          <a href="/login">Back to Login</a>
           <span> | </span>
-          <a href="/register">Register</a>
+          <a href="/register">Create Account</a>
         </div>
       </form>
     </div>
   );
 }
 
-export default LoginForm;
+export default PasswordResetForm;

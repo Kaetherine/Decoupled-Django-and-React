@@ -156,44 +156,130 @@ def logout_api(request):
             'error': 'Logout fehlgeschlagen'
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def password_reset_api(request):
-    """
-    Password reset API endpoint - sends reset email
-    """
-    serializer = PasswordResetSerializer(data=request.data)
-    
-    if serializer.is_valid():
-        email = serializer.validated_data['email']
-        # In production: send actual email with reset link
-        # For now, just return success message
-        return Response({
-            'message': f'Passwort-Reset E-Mail wurde an {email} gesendet'
-        }, status=status.HTTP_200_OK)
-    
-    return Response({
-        'errors': serializer.errors
-    }, status=status.HTTP_400_BAD_REQUEST)
+# API-friendly views using Django's built-in password reset functionality
+
+from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.utils.http import urlsafe_base64_decode
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def password_reset_confirm_api(request):
+def password_reset_api_view(request):
     """
-    Password reset confirm API endpoint
+    API-only password reset - generates token and returns reset info for React frontend
     """
-    serializer = PasswordResetConfirmSerializer(data=request.data)
-    
-    if serializer.is_valid():
-        # In production: validate token and reset password
-        # For now, just return success message
+    try:
+        email = request.data.get('email')
+        if not email:
+            return Response({
+                'errors': {'email': ['This field is required.']}
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Validate email format
+        from django.core.validators import validate_email
+        from django.core.exceptions import ValidationError
+        
+        try:
+            validate_email(email)
+        except ValidationError:
+            return Response({
+                'errors': {'email': ['Invalid email format.']}
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Check if user exists
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            # For security, don't reveal if email exists or not
+            return Response({
+                'message': f'If an account with email {email} exists, a password reset link has been sent.'
+            }, status=status.HTTP_200_OK)
+        
+        # Generate reset token
+        from django.contrib.auth.tokens import default_token_generator
+        from django.utils.http import urlsafe_base64_encode
+        from django.utils.encoding import force_bytes
+        
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        
+        # In a real application, you would send an email here
+        # For development, we'll log the reset link
+        reset_link = f"http://localhost:8080/reset-confirm?uid={uid}&token={token}"
+        
+        print(f"🔗 PASSWORD RESET LINK for {email}:")
+        print(f"   Link: {reset_link}")
+        print(f"   User: {user.username} (ID: {user.id})")
+        print(f"   Token: {token}")
+        print(f"   UID: {uid}")
+        
         return Response({
-            'message': 'Passwort wurde erfolgreich zurückgesetzt'
+            'message': f'Password reset email sent to {email}',
+            'reset_link': reset_link,  # Remove this in production
+            'uid': uid,  # For development purposes
+            'token': token  # For development purposes
         }, status=status.HTTP_200_OK)
-    
-    return Response({
-        'errors': serializer.errors
-    }, status=status.HTTP_400_BAD_REQUEST)
+            
+    except Exception as e:
+        print(f"❌ Password reset error: {str(e)}")
+        return Response({
+            'error': 'An error occurred processing your request'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def password_reset_confirm_api_view(request):
+    """
+    API-friendly password reset confirm using Django's built-in functionality
+    """
+    try:
+        uidb64 = request.data.get('uid')
+        token = request.data.get('token')
+        new_password1 = request.data.get('new_password1')
+        new_password2 = request.data.get('new_password2')
+        
+        if not all([uidb64, token, new_password1, new_password2]):
+            return Response({
+                'errors': {'non_field_errors': ['All fields are required.']}
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Decode user ID
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            return Response({
+                'errors': {'non_field_errors': ['Invalid reset link.']}
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Check token validity
+        if not default_token_generator.check_token(user, token):
+            return Response({
+                'errors': {'non_field_errors': ['Invalid or expired reset link.']}
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Use Django's built-in SetPasswordForm
+        form = SetPasswordForm(user, data={
+            'new_password1': new_password1,
+            'new_password2': new_password2
+        })
+        
+        if form.is_valid():
+            form.save()  # This saves the new password
+            
+            return Response({
+                'message': 'Password reset successfully'
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({
+                'errors': form.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+            
+    except Exception as e:
+        return Response({
+            'error': str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -201,22 +287,32 @@ def password_change_api(request):
     """
     Password change API endpoint
     """
+    print(f"🔄 PASSWORD CHANGE REQUEST for user: {request.user.username}")
     serializer = PasswordChangeSerializer(data=request.data, context={'request': request})
     
     if serializer.is_valid():
         user = request.user
         new_password = serializer.validated_data['new_password1']
+        
+        print(f"👤 Changing password for: {user.username} (ID: {user.id})")
+        
         user.set_password(new_password)
         user.save()
+        
+        print(f"✅ Password updated successfully")
         
         # Update token after password change
         Token.objects.filter(user=user).delete()
         token = Token.objects.create(user=user)
         
+        print(f"🔑 New token generated: {token.key[:10]}...")
+        
         return Response({
             'message': 'Passwort wurde erfolgreich geändert',
             'token': token.key  # New token after password change
         }, status=status.HTTP_200_OK)
+    else:
+        print(f"❌ Password change validation errors: {serializer.errors}")
     
     return Response({
         'errors': serializer.errors

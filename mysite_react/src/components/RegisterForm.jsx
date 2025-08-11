@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './RegisterForm.css';
+import './Auth.css';
 
 function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -67,8 +67,8 @@ function RegisterForm() {
     };
 
     return (
-        <div className="login-form-container">
-            <form onSubmit={handleSubmit} className="login-form">
+        <div className="auth-form-container">
+            <form onSubmit={handleSubmit} className="auth-form">
                 <h2>Register</h2>
                 
                 {error && (
@@ -135,7 +135,7 @@ function RegisterForm() {
 
                 <button 
                     type="submit" 
-                    className="login-button"
+                    className="auth-button"
                     disabled={loading}
                 >
                     {loading ? 'Creating account...' : 'Register'}
