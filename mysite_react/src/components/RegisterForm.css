@@ -16,6 +16,13 @@
   cursor: url('/mindr-cursor.svg') 16 16, pointer;
 }
 
+/* Apply custom cursor to navbar when on register page */
+body:has(.login-form-container) .navbar,
+body:has(.login-form-container) .navbar *,
+body:has(.login-form-container) .navbar *:hover {
+  cursor: url('/mindr-cursor.svg') 16 16, pointer;
+}
+
 .login-form {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
